@@ -1,6 +1,5 @@
-**Hello All,**
+**
 
-## Course selling backend
+## HEllo world
 
-1.  first - npm init -y
-2.  second - npm run start
+**

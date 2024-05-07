@@ -1,6 +1,6 @@
-import { cloudinaryInstance } from "../config/cloudinary";
-import Course from "../models/courseModels";
-import Instructor from "../models/instructorModel";
+import { cloudinaryInstance } from "../config/cloudinary.js";
+import Course from "../models/courseModels.js";
+import Instructor from "../models/instructorModel.js";
 
 export const getCourses = async (req, res) => {
   const courses = await Course.find();
@@ -14,6 +14,7 @@ export const createCourse = async (req, res) => {
         .status(400)
         .json({ success: false, message: "No file uploaded" });
     }
+
     cloudinaryInstance.uploader.upload(req.file.path, async (err, result) => {
       if (err) {
         console.log(err, "error");
@@ -24,6 +25,7 @@ export const createCourse = async (req, res) => {
       }
       const imageUrl = result.url;
       const body = req.body;
+
       console.log(body, "body");
 
       const { title, description, price, instructorEmail } = body;
@@ -57,6 +59,7 @@ export const createCourse = async (req, res) => {
 
 export const updateCourse = async (req, res) => {
   const id = req.params.id;
+  const { description, price, instructor } = req.body;
 
   const updatedCourse = await Course.findOneAndUpdate(
     { _id: id },

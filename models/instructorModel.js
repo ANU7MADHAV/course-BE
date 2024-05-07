@@ -15,6 +15,11 @@ const instructorSchema = new mongoose.Schema(
       type: String,
       enum: ["instructor", "admin"],
     },
+    hashPassword: {
+      type: String,
+      required: true,
+      minLength: 6,
+    },
     courses: [{ type: mongoose.Types.ObjectId, ref: "Course" }],
   },
   { timestamps: true }
