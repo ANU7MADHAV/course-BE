@@ -12,7 +12,7 @@ function authenticateUser(req, res, next) {
     if (err) return res.sendStatus(403);
 
     req.user = user;
-    console.log(req.user.role);
+    // console.log(req.user.role);
 
     next();
   });

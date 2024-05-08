@@ -12,6 +12,7 @@ import {
 } from "../controllers/instructorController.js";
 import upload from "../middlewares/upload-middleware.js";
 import authenticateInstructor from "../middlewares/instructor-middleware.js";
+import authenticateAdmin from "../middlewares/admin-middleware.js";
 
 const instructorRouter = express.Router();
 
@@ -25,7 +26,12 @@ instructorRouter.get(
   getAllInstructors
 );
 
-instructorRouter.post("/add-courses", upload.single("image"), createCourse);
+instructorRouter.post(
+  "/add-courses",
+  authenticateAdmin,
+  upload.single("image"),
+  createCourse
+);
 
 instructorRouter.put("/update-courses/:id", updateCourse);
 

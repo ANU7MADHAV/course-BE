@@ -23,7 +23,10 @@ export const createCourse = async (req, res) => {
           message: "Error",
         });
       }
+      console.log(result);
+
       const imageUrl = result.url;
+
       const body = req.body;
 
       console.log(body, "body");
@@ -59,6 +62,8 @@ export const createCourse = async (req, res) => {
 
 export const updateCourse = async (req, res) => {
   const id = req.params.id;
+  console.log(id);
+
   const { description, price, instructor } = req.body;
 
   const updatedCourse = await Course.findOneAndUpdate(
@@ -72,15 +77,18 @@ export const updateCourse = async (req, res) => {
   if (!updatedCourse) {
     return res.send("Course is not updated");
   }
+
   console.log(updatedCourse);
   return res.send(updatedCourse);
 };
 
 export const deleteCourse = async (req, res) => {
   const id = req.params.id;
+
   const deleteId = await Course.deleteOne({ _id: id });
+
   if (!deleteId) {
     return res.send("not deleted");
   }
-  res.send("deleted course");
+  return res.send("deleted course");
 };
