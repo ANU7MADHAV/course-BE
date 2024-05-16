@@ -23,17 +23,18 @@ export const createCourse = async (req, res) => {
           message: "Error",
         });
       }
-      console.log(result);
 
       const imageUrl = result.url;
 
       const body = req.body;
 
-      console.log(body, "body");
-
       const { title, description, price, instructorEmail } = body;
+      console.log(instructorEmail);
 
-      const findInstructor = await Instructor.find({ email: instructorEmail });
+      const findInstructor = await Instructor.findOne({
+        email: instructorEmail,
+      });
+      console.log(findInstructor);
 
       if (!findInstructor) {
         return res.send("please add instructor first").status(201);
